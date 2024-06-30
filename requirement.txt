@@ -1,0 +1,22 @@
+# Core Libraries
+llama-index~=0.8.17 # Adjust version if needed
+openai~=0.27.8   # Adjust version if needed
+pandas~=2.0.3     # Adjust version if needed
+numpy~=1.25.2     # Adjust version if needed
+
+# Sentiment Analysis
+azure-ai-textanalytics~=5.3.1
+
+# Machine Learning (MLflow)
+mlflow~=2.8.0    
+scikit-learn~=1.3.2
+
+# Portfolio Optimization
+cvxpy~=1.3.2
+scipy~=1.11.3
+
+# Financial Data
+yfinance~=0.2.32
+
+# User Interface (Gradio)
+gradio~=3.39.0
