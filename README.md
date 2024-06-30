@@ -1,4 +1,3 @@
-```markdown
 # Multi-Agent Financial Advisory System with LlamaIndex and OpenAI
 
 This project demonstrates a sophisticated multi-agent system designed to provide comprehensive financial advisory services using LlamaIndex and OpenAI. The system leverages multiple intelligent agents, each specializing in a different aspect of financial analysis and decision-making.
@@ -76,7 +75,7 @@ The system consists of the following key components:
 
 1. **Clone the Repository:** 
    ```bash
-   git clone [https://github.com/your_username/financial-advisory-system.git](https://github.com/your_username/financial-advisory-system.git)
+   git clone [https://github.com/dhrumilvthakkar/financial-advisor.git]
    ```
 
 2. **Create a Virtual Environment (Recommended):**
