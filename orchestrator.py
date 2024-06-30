@@ -38,10 +38,9 @@ tools = [
 agent = OpenAIAgent.from_tools(tools, llm=llm, verbose=True)
 
 
-def orchestrate():
-    # Step 1: Gather User Input
-    customer_data = agent.call("UserInterfaceTool")
-
+def orchestrate(name="John Doe", age=40, risk_tolerance="medium", investment_amount=100000): 
+    # Step 1: Gather Customer Data
+    customer_data = {"name": name, "age": age, "investment_goals": ["retirement", "college fund"], "risk_tolerance": risk_tolerance, "investment_amount": investment_amount}
     # Step 2: Data Collection
     with ThreadPoolExecutor() as executor:
         stock_data_future = executor.submit(agent.call, "StockDataTool", ticker="AAPL", start_date="2022-01-01", end_date="2022-12-31")
@@ -69,9 +68,9 @@ def orchestrate():
     financial_advice = agent.call("AdvisoryTool", customer_data, investment_strategy, market_analysis, industry_trends, financial_ratios, portfolio_management)
 
     # Step 7: Portfolio Optimization
-    df = pd.DataFrame(stock_data)  # Convert stock_data to DataFrame
-    expected_returns = df['Close'].pct_change().mean() * 252  # Annualized returns (simplified example)
-    covariances = df['Close'].pct_change().cov() * 252         # Annualized covariances (simplified example)
+    df = pd.DataFrame(stock_data) 
+    expected_returns = df['Close'].pct_change().mean() * 252  
+    covariances = df['Close'].pct_change().cov() * 252         
     optimal_allocation = agent.call("PortfolioOptimizationTool", expected_returns, covariances, customer_data["risk_tolerance"])
     
     # Step 8: Risk Assessment
@@ -80,9 +79,10 @@ def orchestrate():
 
     # Step 9: Trading (Conceptual)
     for ticker, weight in optimal_allocation.items():
-        action = "BUY" if weight > 0 else "SELL"  # Simplified logic
+        action = "BUY" if weight > 0 else "SELL"  
         quantity = weight * customer_data["investment_amount"]  
         agent.call("TradingTool", ticker, action, quantity) 
+    
 
     # Output the results
     print("Financial Advice:", financial_advice)
@@ -90,6 +90,13 @@ def orchestrate():
     print("Optimal Allocation:", optimal_allocation)
     print("Risk Assessment Results:", risk_assessment_results)
 
+    return {
+        "financial_advice": financial_advice,
+        "investment_strategy": investment_strategy,
+        "optimal_allocation": optimal_allocation,
+        "risk_assessment_results": risk_assessment_results,
+    }
+
 
 if __name__ == "__main__":
-    orchestrate()
+    agent.call("UserInterfaceTool")  # Start the Gradio interface
